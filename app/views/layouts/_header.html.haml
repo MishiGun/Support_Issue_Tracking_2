@@ -1,0 +1,16 @@
+%nav.navbar
+.container
+  .navbar
+    %ul.navbar-left
+      =link_to "Support Issue Tracking", root_path
+    %ul.navbar-right
+      -if signed_in?
+        %li
+          =link_to "#{current_user.user_name}", tickets_path
+        %li
+          = link_to "Sign out", destroy_user_session_path, :method => :delete
+      -else
+        %li
+          =link_to "Sign in", new_user_session_path
+        %li
+          =link_to "Registration", new_user_registration_path

@@ -1,0 +1,24 @@
+.panel.panel-info
+  .panel-heading
+    %h3 
+      %strong Ticket #{@ticket.key} from #{@ticket.name}
+    .panel-body
+      %dl.dl-horizontal
+        %dt
+          Created:
+        %dd
+          #{time_tag @ticket.created_at}
+        %dt
+          Subject:
+        %dd
+          #{@ticket.subject}
+        %dt
+          Department:
+        %dd
+          #{@ticket.department}
+    .panel
+      %dt
+        Text
+      %dd
+        #{@ticket.text}
+
