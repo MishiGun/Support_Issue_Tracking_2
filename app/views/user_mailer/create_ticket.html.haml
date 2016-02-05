@@ -1,6 +1,5 @@
 %p
   Hello,
   %b= @ticket.name
-%p Congratulation, you create ticket with key:
-  %b= @ticket.key
-%p #{link_to 'Reference', ticket_url(@ticket.id)} to view.
+%p Congratulation, you create ticket with key: @ticket.key
+%p #{link_to 'Reference', ticket_url("@ticket.key")} to view

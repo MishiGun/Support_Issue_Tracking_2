@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
 
-	before_filter :authenticate_user!, except: [:new, :create, :index, :show]
+	before_filter :authenticate_user!, except: [:new, :create, :show]
 	 
 	def index
 		@tickets = Ticket.all
@@ -15,9 +15,9 @@ class TicketsController < ApplicationController
     	    key = "#{('A'..'Z').to_a.sample(3).join}-#{rand(100000..999999)}"
     	    @ticket.key = key
 			if @ticket.save
-      			UserMailer.create_ticket(@ticket, request.host_with_port).deliver
+      			UserMailer.create_ticket(@ticket).deliver
       			flash[:success] = "Ticket created! Check your mail."
-				redirect_to @ticket
+				redirect_to(action: "show", id: @ticket.key)
    			else
    				flash.now[:error] = "You have errors in your form!"
    				render "new"
@@ -33,9 +33,12 @@ class TicketsController < ApplicationController
 	end
 
 	def show
-		ticket_id = params[:id]
-      	@ticket = Ticket.find_by(id: ticket_id)
-	end
+    	if user_signed_in?
+    		@ticket = Ticket.find_by(id: params[:id])
+    	else
+    		@ticket = Ticket.find_by(key: params[:id])
+    	end
+  	end
 
 	private
 
