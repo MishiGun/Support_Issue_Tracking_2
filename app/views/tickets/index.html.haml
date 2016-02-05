@@ -1,4 +1,21 @@
-.container(align="center")
-  %h1 Send Ticket
-  = link_to "New Ticket", new_ticket_path, class: "btn btn-primary btn-md"
-  =render "all_tickets"
+%h1(align="center") Tickets History
+%table(align="center")
+  %thead
+    %tr
+      %th Name
+      %th E-mail
+      %th Reference
+      %th Department
+      %th Subject
+      %th Status
+
+  %tbody
+    - @tickets.each do |t|
+      %tr
+        %td= t.name
+        %td= t.email
+        %td= t.key
+        %td= t.department
+        %td= t.subject
+        %td= t.status
+        %td= link_to "Show", t, class: "btn btn-link btn-sm"
