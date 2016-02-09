@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  resources :tickets
+  resources :tickets do
+      resources :answers
+  end
   resources :users
   root 'tickets#new'
   

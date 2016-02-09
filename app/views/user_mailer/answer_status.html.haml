@@ -1,0 +1,5 @@
+%p
+  Hello,
+  %b= @answer.ticket.name
+%p Your ticket has new answer
+%p #{link_to 'Reference', ticket_url("@ticket.key")} to view

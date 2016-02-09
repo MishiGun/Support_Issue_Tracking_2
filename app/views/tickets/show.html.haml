@@ -1,24 +1,41 @@
-.panel.panel-info
-  .panel-heading
-    %h3 
-      %strong Ticket #{@ticket.key} from #{@ticket.name}
-    .panel-body
-      %dl.dl-horizontal
-        %dt
-          Created:
-        %dd
-          #{time_tag @ticket.created_at}
-        %dt
-          Subject:
-        %dd
-          #{@ticket.subject}
-        %dt
-          Department:
-        %dd
-          #{@ticket.department}
-    .panel
-      %dt
-        Text
-      %dd
-        #{@ticket.text}
-
+.container-fluid
+  .row
+    .col-md-3
+    .col-md-6
+      .panel.panel-default
+        .panel-heading 
+          %h3
+            %strong Ticket from #{@ticket.name} 
+          .text-muted personal reference #{@ticket.key}
+          %ul.list-group
+            %li.list-group-item
+              %b Created: 
+              %big #{@ticket.created_at.localtime.strftime("%H:%M %d-%b %Y")}
+            %li.list-group-item
+              %b Subject:
+              %big #{@ticket.subject}
+            %li.list-group-item 
+              %b Department:
+              %big #{@ticket.department}
+            %li.list-group-item
+              %b Text:
+              %big #{@ticket.text}
+        .panel-body
+          -if @ticket.answers.length > 0
+            %h4 Answers:
+          %ul.list-group
+            - @ticket.answers.each do |f|
+              %li.list-group-item
+                - if f.user
+                  %b.text-primary #{f.user.user_name}
+                - else
+                  %b.text-danger Your message
+                %small.text-muted= f.created_at.localtime.strftime("%H:%M %d-%b %Y")
+                %big
+                  %br= f.answer_text
+        .panel-footer
+          = simple_form_for [@ticket, @ticket.answers.new] do |f|
+            .form-inputs
+              = f.text_area :answer_text, class: "form-control"
+            .form-actions
+              = f.submit "Send Answer", class: "btn btn-md btn-info"

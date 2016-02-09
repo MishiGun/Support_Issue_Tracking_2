@@ -26,10 +26,12 @@ class TicketsController < ApplicationController
 		
 	def destroy
     	@ticket.destroy
-    end
+  end
 
 	def update
-		@ticket.update(ticket_params)
+      @ticket = Ticket.find_by(key: params[:id])
+      @ticket.update_attributes(params[:ticket])
+      redirect_to(action: "show", id: @ticket.key)
 	end
 
 	def show
@@ -44,6 +46,6 @@ class TicketsController < ApplicationController
 
 	def ticket_params
     	params.require(:ticket).permit(:key, :name, :email, :department, :subject, :text)
-  	end
+  end
 
 end
