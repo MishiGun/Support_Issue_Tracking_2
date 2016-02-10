@@ -4,6 +4,9 @@ gem 'haml-rails'
 gem 'devise'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
+gem 'metro-ui-rails'
+gem 'frontend_notifier'
 
 group :development, :test do
 	gem 'rspec-rails'

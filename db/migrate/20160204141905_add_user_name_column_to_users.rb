@@ -1,5 +1,5 @@
 class AddUserNameColumnToUsers < ActiveRecord::Migration
   def change
-  	add_column :users, :user_name, :string, default: "NoName"
+  	add_column :users, :user_name, :string
   end
 end

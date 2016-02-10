@@ -12,6 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require metro-ui
 //= require twitter/bootstrap
 //= require turbolinks
-//= require_tree .
+//= require_tree
+//= require lib/_frontend_notifier
+
+
+

@@ -1,22 +1,31 @@
-%h1(align="center") Tickets History
-%table(align="center")
-  %thead
-    %tr
-      %th Name
-      %th E-mail
-      %th Department
-      %th Subject
-      %th Reference
-      %th Status
+.container-fluid
+  .row
+    .col-md-2
+    .col-md-8    
+      %h1(align="center") Tickets History
+      %table.table.table-condensed.table-hover.table
+        %thead
+          %tr.text-info.danger
+            %th Name
+            %th E-mail
+            %th Department
+            %th Subject
+            %th Reference
+            %th Status
+            %th
+            %th
+        %tbody
+          - @tickets.each do |t|
+            %tr.warning
+              %td= t.name
+              %td= t.email
+              %td= t.department
+              %td= t.subject
+              %td= t.key
+              %td.text-success(align="center")
+                %small
+                  %b= t.status
+              %td
+                %button.btn.btn-md
+              %td= link_to "Show", t, class: "btn btn-link btn-sm"
 
-
-  %tbody
-    - @tickets.each do |t|
-      %tr
-        %td= t.name
-        %td= t.email
-        %td= t.department
-        %td= t.subject
-        %td= t.key
-        %td= t.status
-        %td= link_to "Show", t, class: "btn btn-link btn-sm"

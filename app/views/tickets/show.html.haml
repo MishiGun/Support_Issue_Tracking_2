@@ -2,9 +2,9 @@
   .row
     .col-md-3
     .col-md-6
-      .panel.panel-default
+      .panel.panel-warning
         .panel-heading 
-          %h3
+          %h2
             %strong Ticket from #{@ticket.name} 
           .text-muted personal reference #{@ticket.key}
           %ul.list-group
@@ -34,7 +34,7 @@
                 %big
                   %br= f.answer_text
         .panel-footer
-          = simple_form_for [@ticket, @ticket.answers.new] do |f|
+          = simple_form_for [@ticket, @ticket.answers.create] do |f|
             .form-inputs
               = f.text_area :answer_text, class: "form-control"
             .form-actions

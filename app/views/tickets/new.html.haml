@@ -1,12 +1,15 @@
-%h1(align="center") New ticket
-= simple_form_for(@ticket) do |f|
-
-  .form-inputs(align="center")
-    = f.input :name
-    = f.input :email
-    = f.input :subject
-    = f.input :department
-    = f.text_area :text
-
-  .form-actions(align="center")
-    = f.button :submit, class: "btn btn-primary"
+.container-fluid
+  .row
+    .col-md-3
+    .col-md-6
+      .panel
+        %h1(align="center") New ticket
+        = simple_form_for(@ticket) do |f|
+          .panel-body.form-inputs(align="center")
+            = f.input :name, placeholder: "Write you name"
+            = f.input :email, placeholder: "Write you email"
+            = f.input :subject, placeholder: "Enter subject"
+            = f.input :department, placeholder: "Enter department"
+            = f.text_area :text, placeholder: "Enter issue"
+          .panel-footer.form-actions(align="center")
+            = f.button :submit, class: "btn btn-primary"
