@@ -12,7 +12,8 @@
             %th Subject
             %th Reference
             %th Status
-            %th
+            %th Responsible
+            %th Change status
             %th
             %th
         %tbody
@@ -25,10 +26,12 @@
               %td= t.key
               %td.text-success(align="center")
                 %b= t.status
+              %td= t.staff_name
               %td
                 = simple_form_for(t) do |f|
                   = collection_select(:ticket, :status, Status.all, :status_type, :status_type)
-                  = f.submit 'Change status', class: "btn btn-link btn-sm"
+                  = select(:ticket, :staff_name, [current_user.user_name])
+                  = f.submit 'Confirm', class: "btn btn-warning btn-sm"
               %td= link_to "Show", t, class: "btn btn-info btn-sm"
               %td= link_to 'Destroy', t, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
 .container

@@ -41,6 +41,7 @@ class TicketsController < ApplicationController
     #redirect_to(action: "show", id: @ticket.key)
     if signed_in?
       @ticket.update_attributes(ticket_params)
+      UserMailer.update_ticket(@ticket).deliver
       redirect_to tickets_url
     end
   end
@@ -60,7 +61,7 @@ class TicketsController < ApplicationController
   end
 
 	def ticket_params
-    params.require(:ticket).permit(:key, :name, :email, :department, :subject, :text, :status)
+    params.require(:ticket).permit(:key, :name, :email, :department, :subject, :text, :status, :staff_name)
   end
 
 end

@@ -3,10 +3,17 @@
     .col-md-3
     .col-md-6
       .panel.panel-warning
-        .panel-heading 
-          %h2
-            %strong Ticket from #{@ticket.name}
-          .text-muted personal reference #{@ticket.key}
+        .panel-heading
+          .row
+            .col-md-7
+              %h2
+                %strong Ticket from #{@ticket.name}
+                %br 
+                  %span.text-muted responsible officer name: #{@ticket.staff_name}
+            .col-md-2
+              %h3 Status:
+            .col-md-3
+              %h3.text-success #{@ticket.status}
           %ul.list-group
             %li.list-group-item
               %b Created: 
@@ -20,7 +27,6 @@
             %li.list-group-item
               %b Text:
               %big #{@ticket.text}
-              %b #{@ticket.status}
         .panel-body
           -if @ticket.answers.length > 0
             %h4 Answers:
