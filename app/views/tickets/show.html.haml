@@ -5,7 +5,7 @@
       .panel.panel-warning
         .panel-heading 
           %h2
-            %strong Ticket from #{@ticket.name} 
+            %strong Ticket from #{@ticket.name}
           .text-muted personal reference #{@ticket.key}
           %ul.list-group
             %li.list-group-item
@@ -20,6 +20,7 @@
             %li.list-group-item
               %b Text:
               %big #{@ticket.text}
+              %b #{@ticket.status}
         .panel-body
           -if @ticket.answers.length > 0
             %h4 Answers:

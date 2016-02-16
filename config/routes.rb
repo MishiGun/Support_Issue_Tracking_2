@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :answers
   end
   resources :users
+  resources :statuses
   root 'tickets#new'
   
 

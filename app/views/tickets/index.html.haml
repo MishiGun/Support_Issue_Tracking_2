@@ -14,6 +14,7 @@
             %th Status
             %th
             %th
+            %th
         %tbody
           - @tickets.each do |t|
             %tr.warning
@@ -23,9 +24,11 @@
               %td= t.subject
               %td= t.key
               %td.text-success(align="center")
-                %small
-                  %b= t.status
+                %b= t.status
               %td
-                %button.btn.btn-md
-              %td= link_to "Show", t, class: "btn btn-link btn-sm"
-
+                = simple_form_for(t) do |f|
+                  = collection_select(:ticket, :status, Status.all, :status_type, :status_type)
+                  = f.submit 'Change status', class: "btn btn-link btn-sm"
+              %td= link_to "Show", t, class: "btn btn-info btn-sm"
+              %td= link_to 'Destroy', t, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
+.container

@@ -32,8 +32,7 @@ class AnswersController < ApplicationController
 	private
 
 	def answer_params
-      params.require(:answer).permit(:answer_text)
-        .merge(ticket_id: params[:ticket_id])
+      params.require(:answer).permit(:answer_text).merge(ticket_id: params[:ticket_id])
  	end
 
 end
