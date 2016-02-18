@@ -25,6 +25,10 @@ class AnswersController < ApplicationController
       redirect_to ticket_path(Ticket.find(answer.ticket_id).key)
     end
   end
+
+  def destroy
+    @answer.destroy
+  end
 	
   private
 

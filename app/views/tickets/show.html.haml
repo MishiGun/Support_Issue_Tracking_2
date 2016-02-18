@@ -1,6 +1,12 @@
 .container-fluid
   .row
-    .col-md-3
+    .col-md-1
+    .col-md-1
+      - if signed_in?
+        =link_to "Back", tickets_url, class: "btn btn-link back"
+      - else
+        =link_to "Back", root_path, class: "btn btn-link back"
+    .col-md-1
     .col-md-6
       .panel.panel-warning
         .panel-heading

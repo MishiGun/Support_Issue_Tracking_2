@@ -1,18 +1,20 @@
 .navbar
   = render partial: "shared/frontend_notifier"
-  .container-fluide
-    %ul.pull-left
-      = link_to "Support Issue Tracking", root_path
-    %ul.pull-right
-      -if signed_in?
-        %li 
-          = link_to "Tickets", tickets_path
-        %li
-          = link_to "#{current_user.user_name}", users_path
-        %li
-          = link_to "Sign out", destroy_user_session_path, :method => :delete
-      -else
-        %li
-          = link_to "Sign in", new_user_session_path
-        %li
-          = link_to "Registration", new_user_registration_path
+  .raw
+    .col-md-8.logo
+      - if signed_in?
+        = link_to "Support Issue Tracking", root_path
+      - else
+        = link_to "Support Issue Tracking", root_path, class: "unsign"
+    .col-md-2.tickets
+      = link_to "Show Tickets", tickets_path if signed_in?
+    .col-md-2
+      %ul
+        - if signed_in?
+          %li
+            = link_to "#{current_user.user_name}", users_path
+          %li
+            = link_to "Sign out", destroy_user_session_path, :method => :delete
+        - else
+          %li
+            = link_to "Sign in", new_user_session_path, class: "unsign-link"

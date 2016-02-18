@@ -1,0 +1,20 @@
+%center
+  %h1 Statuses
+  %h2 New status
+  = simple_form_for(@status) do |s|
+    .form-inputs
+      = s.input :status_type, placeholder: "Enter status"
+    .form-actions
+      = s.button :submit, class: "btn btn-primary"
+  %table(align="center")
+    %thead
+      %tr
+        %th №
+        %th Type
+    %tbody
+      - @statuses.each do |s|
+        %tr
+          %td= @n
+          %td= s.status_type
+          %td= link_to 'Destroy', s, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"
+        - @n += 1

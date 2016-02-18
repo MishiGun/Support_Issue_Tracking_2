@@ -29,8 +29,9 @@ body {
 	height: 25px;
 }
 
-.pull-left {
-	font-size: 30px;
+.logo {
+	font-size: 28px;
+	padding: 18px;
 }
 
 a {
@@ -48,4 +49,22 @@ a:hover {
 
 .panel-body {
 	background-color: #F2EFDC;
+}
+
+.tickets {
+	padding-top: 26px;
+	font-size: 20px;
+}
+
+.unsign {
+	color: white;
+}
+
+.unsign-link {
+	font-size: 20px;
+	color: white;
+}
+
+.back{
+	font-size: 24px;
 }

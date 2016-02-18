@@ -1,0 +1,25 @@
+%center
+  %h1 Departments
+.row
+  .col-md-2
+  .col-md-4
+    %h2 New department
+    = simple_form_for(@department) do |d|
+      .form-inputs
+        = d.input :department_type, placeholder: "Enter department"
+      .form-actions
+        = d.button :submit, class: "btn btn-primary"
+  .col-md-2
+    %table(align="center")
+      %thead
+        %tr
+          %th №
+          %th Dep
+        %tbody
+          - @departments.each do |d|
+            %tr
+              %td= @n
+              %td= d.department_type
+              %td= link_to 'Destroy', d, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"
+            - @n += 1
+  .col-md-4

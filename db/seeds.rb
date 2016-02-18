@@ -21,3 +21,11 @@ Status.create(
         {status_type: 'Cancelled'},
         {status_type: 'Completed'}
     ])
+
+Department.create(
+    [
+        {department_type: 'IT'},
+        {department_type: 'HR'},
+        {department_type: 'Sale'},
+        {department_type: 'Support'}
+    ])

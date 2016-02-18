@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def after_sign_in_path_for(resource)
-  	tickets_path
+  	"/tickets?filter_status=Waiting+for+Staff+Response"
   end
 
 end

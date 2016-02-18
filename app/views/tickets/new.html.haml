@@ -9,7 +9,9 @@
             = f.input :name, placeholder: "Write you name"
             = f.input :email, placeholder: "Write you email"
             = f.input :subject, placeholder: "Enter subject"
-            = f.input :department, placeholder: "Enter department"
+            %center 
+              %b Department:
+              = collection_select(:ticket, :department, Department.all, :department_type, :department_type)
             = f.text_area :text, placeholder: "Enter issue"
           .panel-footer.form-actions(align="center")
             = f.button :submit, class: "btn btn-primary"
