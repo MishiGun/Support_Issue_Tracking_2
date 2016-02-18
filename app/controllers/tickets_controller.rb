@@ -4,8 +4,10 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 		
   def index
-		@tickets = Ticket.all
-	end
+    @tickets = Ticket.all
+    @tickets = @tickets.filter_status(filter_params[:filter_status]) if filter_params[:filter_status].present?
+		@tickets = Ticket.search{fulltext params[:search]}.results if params[:search].present?
+  end
 
 	def new
 		@ticket = Ticket.new
@@ -14,7 +16,9 @@ class TicketsController < ApplicationController
 	def create
     @ticket = Ticket.new(ticket_params)
     if user_signed_in?
-      redirect_to @ticket and return
+      redirect_to tickets_url
+      flash[:error] = "Ticket create only customer"
+      return
     end
     key = "#{('A'..'Z').to_a.sample(3).join}-#{rand(100000..999999)}"
     @ticket.key = key
@@ -24,7 +28,7 @@ class TicketsController < ApplicationController
       flash[:success] = "Ticket created! Check your mail."
 			redirect_to(action: "show", id: @ticket.key)
    	else
-   		flash.now[:error] = "You have errors in your form!"
+   		flash[:error] = "You have errors in your form!"
    		render "new"
     end
   end
@@ -36,19 +40,21 @@ class TicketsController < ApplicationController
   end
 
 	def update
-    #@ticket = Ticket.find_by(key: params[:id])
-    #@ticket.update_attributes(params[:ticket])
-    #redirect_to(action: "show", id: @ticket.key)
     if signed_in?
       @ticket.update_attributes(ticket_params)
       UserMailer.update_ticket(@ticket).deliver
+      flash[:success] = 'Email deliver'
       redirect_to tickets_url
+    else
+      @ticket = Ticket.find_by(key: params[:id])
+      @ticket.update_attributes(params[:ticket])
+      redirect_to(action: "show", id: @ticket.key)
     end
   end
 
 	def show
     if user_signed_in?
-    	@ticket = Ticket.find(params[:id])
+    	@ticket = Ticket.find_by(params[:key])
     else
       @ticket = Ticket.find_by(key: params[:id])
     end
@@ -62,6 +68,10 @@ class TicketsController < ApplicationController
 
 	def ticket_params
     params.require(:ticket).permit(:key, :name, :email, :department, :subject, :text, :status, :staff_name)
+  end
+
+  def filter_params
+    params.permit(:filter_status)
   end
 
 end

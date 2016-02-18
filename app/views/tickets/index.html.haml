@@ -1,8 +1,22 @@
 .container-fluid
   .row
-    .col-md-2
-    .col-md-8    
+    .col-md-1
+    .col-md-10    
       %h1(align="center") Tickets History
+      .row
+        .col-md-4
+          = form_tag request.original_url, :method => 'get', :class => 'form-inline' do
+            %container
+              = text_field_tag :search, params[:search], :placeholder => "Search", :class => 'form-control'
+              = submit_tag "Go", :name => nil, :class => 'btn btn-default'
+        .col-md-8
+          = link_to "All Tickets", tickets_path, :class => "btn btn-info"
+          = link_to "New unussigned", {:filter_status => "Waiting for Staff Response"}, :class => "btn btn-success"
+          = link_to "Open Tickets", {:filter_status => "Waiting for Customer"}, :class => "btn btn-success"
+          = link_to "On Hold", {:filter_status => "On Hold"}, :class => "btn btn-success"
+          = link_to "Cancelled Tickets", {:filter_status => "Cancelled"}, :class => "btn btn-success"
+          = link_to "Closed Tickets", {:filter_status => "Completed"}, :class => "btn btn-success"
+      %br
       %table.table.table-condensed.table-hover.table
         %thead
           %tr.text-info.danger
@@ -18,20 +32,20 @@
             %th
         %tbody
           - @tickets.each do |t|
-            %tr.warning
+            %tr
               %td= t.name
               %td= t.email
               %td= t.department
               %td= t.subject
-              %td= t.key
-              %td.text-success(align="center")
+              %td= link_to t.key, "/tickets/#{t.key}"
+              %td.text-success
                 %b= t.status
               %td= t.staff_name
               %td
                 = simple_form_for(t) do |f|
                   = collection_select(:ticket, :status, Status.all, :status_type, :status_type)
                   = select(:ticket, :staff_name, [current_user.user_name])
-                  = f.submit 'Confirm', class: "btn btn-warning btn-sm"
-              %td= link_to "Show", t, class: "btn btn-info btn-sm"
-              %td= link_to 'Destroy', t, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"
-.container
+                  = f.submit 'Confirm', class: "btn btn-warning btn-xs"
+              %td= link_to "Show", t, class: "btn btn-info btn-xs"
+              %td= link_to 'Destroy', t, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"
+    .col-md-1

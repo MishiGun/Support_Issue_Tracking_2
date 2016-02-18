@@ -7,12 +7,16 @@ gem 'twitter-bootstrap-rails'
 gem 'therubyracer'
 gem 'metro-ui-rails'
 gem 'frontend_notifier'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+gem 'progress_bar'
 
 group :development, :test do
 	gem 'rspec-rails'
   	gem 'guard-rspec'
   	gem 'byebug'
-  	gem 'factory_girl_rails' 
+  	gem 'factory_girl_rails'
+  	gem "sunspot-rails-tester" 
 end
 
 
