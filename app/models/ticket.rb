@@ -5,6 +5,7 @@ class Ticket < ActiveRecord::Base
   
   validates :name, presence: true
   validates :email, presence: true
+  validates :text, presence: true
 
   after_create :reindex!
   after_update :reindex!

@@ -1,13 +1,17 @@
 .navbar
   = render partial: "shared/frontend_notifier"
   .raw
-    .col-md-8.logo
+    .col-md-7.logo
       - if signed_in?
         = link_to "Support Issue Tracking", root_path
       - else
         = link_to "Support Issue Tracking", root_path, class: "unsign"
-    .col-md-2.tickets
-      = link_to "Show Tickets", tickets_path if signed_in?
+    .col-md-1.nav-links
+      = link_to "Tickets", tickets_path if signed_in?
+    .col-md-1.nav-links
+      = link_to "Statuses", statuses_path if signed_in?
+    .col-md-1.nav-links
+      = link_to "Departments", departments_path if signed_in?
     .col-md-2
       %ul
         - if signed_in?

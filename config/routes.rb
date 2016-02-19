@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+
+  root 'tickets#new'
+  
+  resources :tickets do
+    resources :answers
+  end
   
   devise_for :users
-  resources :tickets do
-      resources :answers
-  end
   resources :users
   resources :statuses
   resources :departments
-  root 'tickets#new'
   
 
   # The priority is based upon order of creation: first created -> highest priority.

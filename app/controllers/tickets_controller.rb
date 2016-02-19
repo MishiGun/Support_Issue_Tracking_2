@@ -53,11 +53,7 @@ class TicketsController < ApplicationController
   end
 
 	def show
-    if user_signed_in?
-    	@ticket = Ticket.find_by(params[:key])
-    else
-      @ticket = Ticket.find_by(key: params[:id])
-    end
+    @ticket = Ticket.find_by(key: params[:id])
   end
 
 	private

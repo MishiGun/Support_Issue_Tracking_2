@@ -15,7 +15,9 @@
               %h2
                 %strong Ticket from #{@ticket.name}
                 %br 
-                  %span.text-muted responsible officer name: #{@ticket.staff_name}
+                - if @ticket.staff_name
+                  %span.text-muted
+                    responsible officer name: #{@ticket.staff_name}
             .col-md-2
               %h3 Status:
             .col-md-3

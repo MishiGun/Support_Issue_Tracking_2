@@ -1,20 +1,23 @@
-%center
-  %h1 Departments
+%h1(align="center") Departments
+%br
 .row
   .col-md-2
   .col-md-4
-    %h2 New department
-    = simple_form_for(@department) do |d|
-      .form-inputs
-        = d.input :department_type, placeholder: "Enter department"
-      .form-actions
-        = d.button :submit, class: "btn btn-primary"
+    %center
+      %h2 New department
+      = simple_form_for(@department) do |d|
+        .form-inputs
+          = d.input :department_type, placeholder: "Enter department"
+        .form-actions
+          = d.button :submit, class: "btn btn-primary"
   .col-md-2
-    %table(align="center")
+    %br
+    %table.table.table-hover.table-bordered
       %thead
         %tr
           %th №
-          %th Dep
+          %th Department
+          %th
         %tbody
           - @departments.each do |d|
             %tr

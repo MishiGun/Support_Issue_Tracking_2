@@ -37,15 +37,15 @@
               %td= t.email
               %td= t.department
               %td= t.subject
-              %td= link_to t.key, "/tickets/#{t.key}"
+              %td= t.key
               %td.text-success
                 %b= t.status
               %td= t.staff_name
               %td
                 = simple_form_for(t) do |f|
                   = collection_select(:ticket, :status, Status.all, :status_type, :status_type)
-                  = select(:ticket, :staff_name, [current_user.user_name])
+                  %p.hidden= select(:ticket, :staff_name, [current_user.user_name])
                   = f.submit 'Confirm', class: "btn btn-warning btn-xs"
-              %td= link_to "Show", t, class: "btn btn-info btn-xs"
+              %td= link_to "Show", "/tickets/#{t.key}", class: "btn btn-info btn-xs"
               %td= link_to 'Destroy', t, :method => :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs"
     .col-md-1

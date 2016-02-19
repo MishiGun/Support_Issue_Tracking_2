@@ -1,13 +1,24 @@
 %h1(align="center") Users
-%table(align="center")
-  %thead
-    %tr
-      %th Name
-      %th E-mail
-
-  %tbody
-    - @users.each do |t|
-      %tr
-        %td= t.user_name
-        %td= t.email
-        %td= link_to "Update", t, class: "btn btn-link btn-sm"
+%br
+.row
+  .col-md-3
+  .col-md-6
+    %br
+    %table.table.table-hover.table-bordered
+      %thead
+        %tr
+          %th №
+          %th Name
+          %th Email
+          %th Last visit
+          %th IP
+        %tbody
+          - @users.each do |u|
+            %tr
+              %td= @n
+              %td= u.user_name
+              %td= u.email
+              %td= u.last_sign_in_at.localtime.strftime("%H:%M %d-%b %Y")
+              %td= u.last_sign_in_ip
+            - @n += 1
+  .col-md-3
