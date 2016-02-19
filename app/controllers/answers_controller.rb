@@ -11,21 +11,16 @@ class AnswersController < ApplicationController
   def create
     answer = Answer.new(answer_params)
     @ticket = Ticket.find(params[:ticket_id])
-	  if user_signed_in?
-	    answer.user_id = current_user.id
+    answer.user_id = current_user.id if user_signed_in?
     	if answer.save
    		  UserMailer.answer_status(answer).deliver
 		    flash[:success] = "Answer deliver."
 		  else
 		    flash.now[:error] = "You have errors!"
 		  end
-      redirect_to ticket_path(answer.ticket_id)
-    else
-      answer.save
-      redirect_to ticket_path(Ticket.find(answer.ticket_id).key)
-    end
+    redirect_to ticket_path(Ticket.find(answer.ticket_id).key)
   end
-
+  
   def destroy
     @answer.destroy
   end
