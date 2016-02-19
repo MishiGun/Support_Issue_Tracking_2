@@ -1,11 +1,15 @@
 SupportIssueTracker
 
+
 Before use run:
-	1. bundle install
+    
+    
+    1. bundle install
     2. rake db:migrate
     3. rake db:seed
     4. rake sunspot:solr:start  for start search engine 
     5. rails s
+
 
 Go to this link localhost:3000/ in browser
 
