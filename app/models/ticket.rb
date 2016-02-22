@@ -20,6 +20,10 @@ class Ticket < ActiveRecord::Base
   end
    
   protected
+  
+  def self.counter(s)
+    where(status:s).to_a.size
+  end
  
   def reindex!
   	Sunspot.index!(self)
