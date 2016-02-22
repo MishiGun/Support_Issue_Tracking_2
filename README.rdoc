@@ -1,7 +1,7 @@
 SupportIssueTracker
 
 
-Before use run:
+Before use, run:
     
     
     1. bundle install
@@ -10,6 +10,8 @@ Before use run:
     4. rake sunspot:solr:start  for start search engine 
     5. rails s
 
+
+New user can be created in the file "db/seeds.rb"
 
 Go to this link localhost:3000/ in browser
 
