@@ -3,10 +3,16 @@ class TicketsController < ApplicationController
 	before_filter :authenticate_user!, except: [:new, :create, :show]
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 		
-  def index
+	def index
     @tickets = Ticket.all
     @tickets = @tickets.filter_status(filter_params[:filter_status]) if filter_params[:filter_status].present?
 		@tickets = Ticket.search{fulltext params[:search]}.results if params[:search].present?
+    @new_count = Ticket.counter("Waiting for Staff Response")
+    @open_count = Ticket.counter("Waiting for Customer")
+    @on_hold_count = Ticket.counter("On Hold")
+    @cancelled_count = Ticket.counter("Cancelled")
+    @closed_count = Ticket.counter("Completed")
+    @all_count = Ticket.all.size
   end
 
 	def new
