@@ -10,12 +10,12 @@
               = text_field_tag :search, params[:search], :placeholder => "Search", :class => 'form-control'
               = submit_tag "Go", :name => nil, :class => 'btn btn-default'
         .col-md-8
-          = link_to "All Tickets", tickets_path, :class => "btn btn-info"
-          = link_to "New unussigned", {:filter_status => "Waiting for Staff Response"}, :class => "btn btn-success"
-          = link_to "Open Tickets", {:filter_status => "Waiting for Customer"}, :class => "btn btn-success"
-          = link_to "On Hold", {:filter_status => "On Hold"}, :class => "btn btn-success"
-          = link_to "Cancelled Tickets", {:filter_status => "Cancelled"}, :class => "btn btn-success"
-          = link_to "Closed Tickets", {:filter_status => "Completed"}, :class => "btn btn-success"
+          = link_to "All Tickets:#{@all_count}", tickets_path, :class => "btn btn-info"
+          = link_to "New unussigned:#{@new_count}", {:filter_status => "Waiting for Staff Response"}, :class => "btn btn-success"
+          = link_to "Open:#{@open_count}", {:filter_status => "Waiting for Customer"}, :class => "btn btn-success"
+          = link_to "On Hold:#{@on_hold_count}", {:filter_status => "On Hold"}, :class => "btn btn-success"
+          = link_to "Cancelled:#{@cancelled_count}", {:filter_status => "Cancelled"}, :class => "btn btn-success"
+          = link_to "Closed:#{@closed_count}", {:filter_status => "Completed"}, :class => "btn btn-success"
       %br
       %table.table.table-condensed.table-hover.table
         %thead
